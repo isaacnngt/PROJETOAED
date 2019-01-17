@@ -16,6 +16,7 @@ int validar_login_usuario();
               TELA INCIAL - CARREGAMENTO DO SISTEMA
 ------------------------------------------------------------------------*/
 
+//OBSERVACAO PARA RODAR CÓDIGO, NECESSÁRIO ESTAR ATIVA A MARCAÇÃO -STD=C99 OR STD-=GNU99 PARA PODER COMPILAR
 void frescura()
 {
     printf("\t\t@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n");
@@ -44,6 +45,7 @@ void frescura()
 
     printf ("\n\n\t\t\tCARREGANDO O SISTEMA: \n\n");
 
+  //CASO TRAVE NESTA PARTE, NECESSÁRIO ATIVAR A MARCAÇÃO -STD=C99 OR STD-=GNU99 PARA PODER COMPILAR  
     for (int i = 0; i <= 25; i++)
     {
         printf ("%d%%\r", i*4);
