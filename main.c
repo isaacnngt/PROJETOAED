@@ -4,8 +4,9 @@
 #include <time.h>
 #include <windows.h>
 #define FLSH gets(l)
-#define conta_adm "root"
-#define senha_adm "root"
+#define conta_adm "admin"
+#define senha_adm "admin"
+#include <locale.h>
 
 void login_adm();
 void menu_login_inicial();
@@ -15,7 +16,6 @@ int validar_login_usuario();
 /*-----------------------------------------------------------------------
               TELA INCIAL - CARREGAMENTO DO SISTEMA
 ------------------------------------------------------------------------*/
-
 //OBSERVACAO PARA RODAR CÓDIGO, NECESSÁRIO ESTAR ATIVA A MARCAÇÃO -STD=C99 OR STD-=GNU99 PARA PODER COMPILAR
 void frescura()
 {
@@ -45,7 +45,6 @@ void frescura()
 
     printf ("\n\n\t\t\tCARREGANDO O SISTEMA: \n\n");
 
-  //CASO TRAVE NESTA PARTE, NECESSÁRIO ATIVAR A MARCAÇÃO -STD=C99 OR STD-=GNU99 PARA PODER COMPILAR  
     for (int i = 0; i <= 25; i++)
     {
         printf ("%d%%\r", i*4);
@@ -103,16 +102,16 @@ int validar_login_adm(int a,int c)
     return (r);
 }
 
-//CADASTRO DO LOGIN DO USUARIO
+//PROCEDIMENTO PARA CADASTRO DE USUÁRIOS CLIENTES (USUÁRIOS)
 void cadastro_cliente(int a)
 {
     int b,c;
     system("cls");
 usuario_existente:
     usuario[a].codigo = a+1;
-    printf("\n\tCadastro %d",usuario[a].codigo);
-    puts("\n\n\tDigite o login: ");
-    printf("\t");
+    printf("\n\t\t\tCADASTRO %d",usuario[a].codigo);
+    puts("\n\n\t\t\tDIGITE O LOGIN: ");
+    printf("\t\t\t");
     scanf(" %s",cadastro_user[a].user);
     for (c=0; c<1000; c++)
     {
@@ -123,27 +122,32 @@ usuario_existente:
     if (b==0)
     {
         memcpy(usuario[a].user,cadastro_user[a].user,50);
-        puts("\tDigite a senha: ");
-        printf("\t");
+        puts("\t\t\tDIGITE A SENHA: ");
+        printf("\t\t\t");
         scanf(" %s",usuario[a].pass);
     }
     else if (b==1)
     {
-        printf("\nLogin ja existente!\n");
+        printf("\n\t\t\tLOGIN JÁ EXISTENTE\n");
         goto usuario_existente;
     }
+    system("cls");
+    printf("\n\t\t\tCADASTRO EFETUADO COM SUCESSO!\n");
+    printf("\t\t\tPRESSIONE QUALQUER TECLA PARA PROSSEGUIR...");
+    getch();
+    system("cls");
 }
 
-//CADASTRO DO ADMINISTRADOR
+//PROCEDIMENTO PARA CADASTRO DE USUÁRIOS ADMINISTRADORES
 void cadastro_administrador(int a)
 {
     int b,c;
     system("cls");
 admin_existente:
     admin[a].codigo = a+1;
-    printf("\n\tCadastro %d",admin[a].codigo);
-    puts("\n\n\tDigite o login: ");
-    printf("\t");
+    printf("\n\t\t\tCADASTRO %d",admin[a].codigo);
+    puts("\n\n\t\t\tDIGITE O LOGIN: ");
+    printf("\t\t\t");
     scanf(" %s",cad_admin[a].user);
     for (c=0; c<50; c++)
     {
@@ -154,15 +158,20 @@ admin_existente:
     if (b==0)
     {
         memcpy(admin[a].user,cad_admin[a].user,50);
-        puts("\tDigite a senha: ");
-        printf("\t");
+        puts("\t\t\tDIGITE A SENHA: ");
+        printf("\t\t\t");
         scanf(" %s",admin[a].pass);
     }
     else if (b==1)
     {
-        printf("\nLogin ja existente!\n");
+        printf("\n\t\t\tLOGIN JÁ EXISTENTE!\n");
         goto admin_existente;
     }
+    system("cls");
+    printf("\n\t\t\tCADASTRO EFETUADO COM SUCESSO!\n");
+    printf("\t\t\tPRESSIONE QUALQUER TECLA PARA PROSSEGUIR...");
+    getch();
+    system("cls");
 }
 
 //PROCEDIMENTO RELIZACAO DO LOGIN  DO USUARIO
@@ -211,7 +220,7 @@ erro_login:
         {
             system("cls");
             printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) %s\n",login[0]);
-            printf("Codigo do usuario: %d\n\n",usuario[c].codigo);
+            printf("\t\t\tCODIGO USUARIO: %d\n\n",usuario[c].codigo);
             login_usuario();
         }
     }
@@ -293,7 +302,9 @@ erro_login:
         printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR");
         getchar();
         system("cls");
-        // printf("Codigo do ADMIN: %d\n\n",admin[c].codigo);
+        //NAO DESCOMENTAR PRINTF ABAIXO POIS DA PROBLEMA NA HORA DE EFETUAR LOGIN DO AMDMIN
+        //PROCESSO AINDA SER TRABALHADO
+        //printf("\t\t\tCODIGO DO ADMIN: %d\n\n",admin[c].codigo);
         login_adm();
     }
 }
@@ -646,7 +657,9 @@ void procurar(void)
 
 int main(int argc, char **argv)
 {
-    int i, j;
+    //Setando o local para aceitar acentos
+    setlocale(LC_ALL,"Portuguese");
+    //int i, j;
     //char opcao[3], l[50];
     int opcao;
 
