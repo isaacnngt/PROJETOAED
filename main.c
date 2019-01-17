@@ -548,8 +548,8 @@ void cabecalho(void)
     printf("\t\t\tCRIACAO DA ROTA:\n");
     printf("\t\t\t 1 - ADICIONAR GRAFO\n"
            "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
-           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n");
-
+           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
+    printf("\t\t\tOPCAO :");
     scanf("%i", &opcao);
     switch (opcao)
     {
@@ -613,7 +613,7 @@ void add(void)
 
             do
             {
-                printf("CUSTO (positivo) DA ARESTA DO VERTICE %d PARA O VERTICE %d: ",
+                printf("\t\t\tCUSTO (positivo) DA ARESTA DO VERTICE %d PARA O VERTICE %d: ",
                        origem, destino);
                 scanf("%d",&custo);
             }
@@ -676,3 +676,4 @@ int main(int argc, char **argv)
 
     return 0;
 }
+
