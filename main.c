@@ -300,7 +300,7 @@ erro_login:
         system("cls");
         printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) [ADM]%s\n",login[0]);
         printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR");
-        getchar();
+        getch();
         system("cls");
         //NAO DESCOMENTAR PRINTF ABAIXO POIS DA PROBLEMA NA HORA DE EFETUAR LOGIN DO AMDMIN
         //PROCESSO AINDA SER TRABALHADO
