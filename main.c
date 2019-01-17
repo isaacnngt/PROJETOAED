@@ -208,7 +208,7 @@ erro_login:
         else if (logado==2)
         {
             system("cls");
-            printf("\nLogado com sucesso!\n\nBem-vindo(a) %s\n",login[0]);
+            printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) %s\n",login[0]);
             printf("Codigo do usuario: %d\n\n",usuario[c].codigo);
             login_usuario();
         }
@@ -280,14 +280,17 @@ erro_login:
     if (logado==1)
     {
         system("cls");
-        printf("\nLogin e/ou senha incorreto(s)\n");
-        printf("\nTente Novamente!\n");
+        printf("\n\t\t\tLOGIN E/OU SENHA INCORRETA(S)\n");
+        printf("\n\t\t\tTENTE NOVAMENTE!\n");
         goto erro_login;
     }
     else if (logado==2)
     {
         system("cls");
-        printf("\n\tLogado com sucesso!\n\n\tBem-vindo(a) [ADM]%s\n",login[0]);
+        printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) [ADM]%s\n",login[0]);
+        printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR");
+        getchar();
+        system("cls");
         // printf("Codigo do ADMIN: %d\n\n",admin[c].codigo);
         login_adm();
     }
@@ -300,16 +303,20 @@ void login_adm()
     int a=0,adm_cad=0,b,c,nc;
 
 tela_inicial_adm:
-    printf("\n\t\t\t1- CADASTRO DE USUARIOS\n");
-    printf("\n\t\t\t2- CADASTRO DE ADMINISTRADORES\n");
-    printf("\n\t\t\t9- VOLTAR TELA DE LOGIN\n");
+    printf("\t--------------------------------------------------------------\n");
+    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
+    printf("\t\t\t\t\  TELA DE LOGIN\n");
+    printf("\t---------------------------------------------------------------\n\n");
+    printf("\n\t\t\t1- REALIZAR CADASTRO DE USUARIOS\n");
+    printf("\n\t\t\t2- REALIZAR CADASTRO DE ADMINISTRADORES\n");
+    printf("\n\t\t\t3- VOLTAR TELA DE LOGIN\n");
     printf("\n\t\t\tCTRL + C PARA FECHAR\n");
     printf("\t\t\tOPCAO:\t");
     scanf("%d", &op_adm);
     system("cls");
     if (op_adm == 1)
     {
-        printf("\nDESEJA REALIZAR QUANTOS CADASTROS ?\n");
+        printf("\n\t\t\tDESEJA REALIZAR QUANTOS CADASTROS ?\n");
         printf("\t\t\tQUANTIDADE:");
         scanf("%d",&nc);
         if (a==0)
@@ -334,7 +341,7 @@ tela_inicial_adm:
     }
     else if (op_adm == 2)
     {
-        printf("\nDESEJA REALIZAR QUANTOS CADASTROS ?\n");
+        printf("\n\t\t\tDESEJA REALIZAR QUANTOS CADASTROS ?\n");
         printf("\t\t\tQUANTIDADE:");
         scanf("%d",&nc);
         if (adm_cad==0)
@@ -359,7 +366,7 @@ tela_inicial_adm:
     }
     else if (op_adm == 0)
         exit(0);
-    else if (op_adm == 9)
+    else if (op_adm == 3)
         menu_login_inicial();
 }
 
@@ -369,6 +376,10 @@ void menu_login_inicial()
     int op_login;
 
 menu_de_login:
+    printf("\t--------------------------------------------------------------\n");
+    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
+    printf("\t\t\t\t\  TELA DE LOGIN\n");
+    printf("\t---------------------------------------------------------------\n\n");
     printf("\t\t\t1 - Login de USUARIO\n");
     printf("\t\t\t2 - Login de ADMINISTRADOR\n");
     printf("\t\t\tCTRL + C - FECHAR\n");
@@ -383,7 +394,11 @@ menu_de_login:
     else
     {
         system("cls");
-        printf("\t\t\tOPCAO INVALIDA!\n");
+        printf("\t\t\t\tOPCAO INVALIDA!\n");
+        printf("\t\t\tPRESSIONE QUALQUER TECLA PARA VOLTAR...\n");
+        printf("\t\t\t");
+        getch();
+        system("cls");
         goto menu_de_login;
     }
 }
@@ -640,4 +655,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
