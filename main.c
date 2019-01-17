@@ -323,6 +323,7 @@ tela_inicial_adm:
     printf("\n\t\t\t1- REALIZAR CADASTRO DE USUARIOS\n");
     printf("\n\t\t\t2- REALIZAR CADASTRO DE ADMINISTRADORES\n");
     printf("\n\t\t\t3- VOLTAR TELA DE LOGIN\n");
+    printf("\n\t\t\t4- MENU GRAFOS\n");
     printf("\n\t\t\tCTRL + C PARA FECHAR\n");
     printf("\t\t\tOPCAO:\t");
     scanf("%d", &op_adm);
@@ -381,7 +382,10 @@ tela_inicial_adm:
         exit(0);
     else if (op_adm == 3)
         menu_login_inicial();
+    else if (op_adm == 4)
+        cabecalho();
 }
+
 
 //MENU INICIAL DO LOGIN
 void menu_login_inicial()
@@ -541,10 +545,10 @@ void cabecalho(void)
     printf("\t--------------------------------------------------------------\n");
     printf("\t\t\t\t\SISTEMA DE ROTAS\n");
     printf("\t---------------------------------------------------------------\n\n");
-    printf("Criacao da rota:\n");
-    printf("\t 1 - Adicionar Grafo\n"
-           "\t 2 - Procura Os Menores Caminhos no Grafo\n"
-           "\t CTRL+C para Sair do programa\n");
+    printf("\t\t\tCRIACAO DA ROTA:\n");
+    printf("\t\t\t 1 - ADICIONAR GRAFO\n"
+           "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
+           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n");
 
     scanf("%i", &opcao);
     switch (opcao)
@@ -577,7 +581,7 @@ void add(void)
 
     do
     {
-        printf("\nQual o numero de vertices (numero minimo = 2 ): ");
+        printf("\n\t\t\tQUAL NUMERO DE VERTICES (numero minimo = 2 ): ");
         scanf("%d",&vertices);
     }
     while (vertices < 2 );
@@ -588,12 +592,12 @@ void add(void)
     for (i = 0; i <= vertices * vertices; i++)
         custos[i] = -1;
 
-    printf("Insira as arestas:\n");
+    printf("\t\t\tINSIRA AS ARESTAS:\n");
     do
     {
         do
         {
-            printf("Origem da aresta (entre 1 e %d ou '0' para sair): ", vertices);
+            printf("\t\t\tORIGEM DA ARESTA (entre 1 e %d ou '0' para sair): ", vertices);
             scanf("%d",&origem);
         }
         while (origem < 0 || origem > vertices);
@@ -602,14 +606,14 @@ void add(void)
         {
             do
             {
-                printf("Destino da aresta (entre 1 e %d, menos %d): ", vertices, origem);
+                printf("\t\t\tDESTINO DA ARESTA (entre 1 e %d, menos %d): ", vertices, origem);
                 scanf("%d", &destino);
             }
             while (destino < 1 || destino > vertices || destino == origem);
 
             do
             {
-                printf("Custo (positivo) da aresta do vertice %d para o vertice %d: ",
+                printf("CUSTO (positivo) DA ARESTA DO VERTICE %d PARA O VERTICE %d: ",
                        origem, destino);
                 scanf("%d",&custo);
             }
@@ -632,12 +636,14 @@ void procurar(void)
 
     if(vertices == NULL)
     {
-
-        printf("CRIE PRIMEIRO UM GRAFO");
+        system("cls");
+        printf("\t\t\tCRIE PRIMEIRO UM GRAFO...");
+        printf("\t\t\tPRESSIONE ENTER PARA CONTINUAR");
+        getch();
         add();
     }
 
-    printf("Lista dos Menores Caminhos no Grafo Dado: \n");
+    printf("\t\t\tLISTA DOS MENORES CAMINHOS NO GRAFO: \n");
 
     for (i = 1; i <= vertices; i++)
     {
@@ -646,7 +652,7 @@ void procurar(void)
         printf("\n");
     }
 
-    printf("ENTER para voltar ao menu inicial>\n");
+    printf("\t\t\tENTER PARA VOLTAR AO MENU INICIAL DO GRAFO>\n");
 
 }
 
