@@ -49,7 +49,7 @@ void frescura()
 
     for (int i = 0; i <= 25; i++)
     {
-        printf ("%d%%\r", i*4);
+        printf (" %d%%\r", i*4);
         fflush (stdout);
         for (int j = 0; j < i; j++)
         {
@@ -708,7 +708,7 @@ void procurar(void)
 int main(int argc, char **argv)
 {
     //Setando o local para aceitar acentos
-    setlocale(LC_ALL,"Portuguese");
+    //setlocale(LC_ALL,"Portuguese");
     //int i, j;
     //char opcao[3], l[50];
     int opcao;
