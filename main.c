@@ -219,8 +219,10 @@ erro_login:
         else if (logado==2)
         {
             system("cls");
-            printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) %s\n",login[0]);
+            printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A): %s\n",login[0]);
             printf("\t\t\tCODIGO USUARIO: %d\n\n",usuario[c].codigo);
+            printf("\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR... \n");
+            getch();
             login_usuario();
         }
     }
@@ -231,8 +233,10 @@ void login_usuario()
     int op_user;
 
 tela_inicial_user:
-    printf("\n\t\t\t9- VOLTAR TELA DE LOGIN");
-    printf("\n\t\t\tCTRL + C PARA Fechar\n\t");
+    //printf("\n\t\t\t9- VOLTAR TELA DE LOGIN");
+    system("cls");
+    cabecalho_usuario();
+    /*printf("\n\t\t\tCTRL + C PARA Fechar\n\t");
     scanf("%d",&op_user);
 
     if (op_user==9)
@@ -247,7 +251,7 @@ tela_inicial_user:
         system("cls");
         printf("\n\tOPCAO INVALIDA\n");
         goto tela_inicial_user;
-    }
+    }*/
 }
 
 //PROCEDIMENTO PARA LOGIN DO ADMINISTRADOR
@@ -298,7 +302,7 @@ erro_login:
     else if (logado==2)
     {
         system("cls");
-        printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A) [ADM]%s\n",login[0]);
+        printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A): [ADM]%s\n",login[0]);
         printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR");
         getch();
         system("cls");
@@ -572,6 +576,44 @@ void cabecalho(void)
     }
 }
 
+void cabecalho_usuario(void)
+{
+    int opcao;
+tela_inicial_usu:
+    printf("\t--------------------------------------------------------------\n");
+    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
+    printf("\t---------------------------------------------------------------\n\n");
+    printf("\t\t\tCRIACAO DA ROTA:\n");
+    printf("\t\t\t 1 - CRIAR NOVO GRAFO GRAFO\n"
+           "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
+           "\t\t\t 3 - VOLTAR MENU DE LOGIN\n"
+           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
+    printf("\t\t\tOPCAO :");
+    scanf("%i", &opcao);
+    if (opcao == 1)
+    {
+        add();
+    }
+    else if (opcao == 2)
+    {
+        procurar();
+    }
+    else if (opcao == 3)
+    {
+        system("cls");
+        menu_login_inicial();
+    }
+    else
+    {
+
+        system("cls");
+        printf("\n\tATENCAO! >> OPCAO INVALIDA DIGITE 1, 2, 3 OU CTRL + C PARA FECHAR O PROGRAMA\n\n");
+        goto tela_inicial_usu;
+    }
+
+}
+
+
 /*--------------------------------------------------------------------------------------------
                       DISTRIBUICAO DOS VERTICES E DAS ARESTAS
 ---------------------------------------------------------------------------------------------*/
@@ -676,4 +718,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
