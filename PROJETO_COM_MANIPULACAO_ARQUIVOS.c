@@ -132,7 +132,7 @@ usuario_existente:
     }
     else if (b==1)
     {
-        printf("\n\t\t\tLOGIN JÁ EXISTENTE\n");
+        printf("\n\t\t\tLOGIN JA EXISTENTE\n");
         goto usuario_existente;
     }
     system("cls");
@@ -143,6 +143,7 @@ usuario_existente:
     system("cls");
     P=fopen("login_usuario.txt", "w");
     fwrite(&usuario, sizeof(usuario), 1, P);
+    fwrite(&cadastro_user, sizeof(cadastro_user), 1, P);
     fclose(P);
 }
 
@@ -185,6 +186,7 @@ admin_existente:
     admin[a].status=1;
     P=fopen("login_admin.txt", "w");
     fwrite(&admin, sizeof(admin), 1, P);
+    fwrite(&cad_admin, sizeof(cad_admin), 1, P);
     fclose(P);
 }
 void listar_usuarios()
@@ -192,6 +194,7 @@ void listar_usuarios()
     FILE *P;
     P=fopen("login_usuario.txt", "r");
     fread(&usuario, sizeof(usuario), 1, P);
+    fread(&cadastro_user, sizeof(cadastro_user), 1, P);
 
     int i,j, n=1, r;
     int ordem;
@@ -220,6 +223,7 @@ void listar_administrador()
     FILE *P;
     P=fopen("login_admin.txt", "r");
     fread(&admin, sizeof(admin), 1, P);
+    fread(&cad_admin, sizeof(cad_admin), 1, P);
 
     int i,j, n=1, r;
     int ordem;
@@ -371,7 +375,7 @@ erro_login:
     {
         system("cls");
         printf("\n\t\t\tLOGADO COM SUCESSO!\n\n\t\t\tBEM-VINDO(A): [ADM]%s\n",login[0]);
-        printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR");
+        printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA CONTINUAR...");
         getch();
         system("cls");
         //NAO DESCOMENTAR PRINTF ABAIXO POIS DA PROBLEMA NA HORA DE EFETUAR LOGIN DO AMDMIN
@@ -389,8 +393,8 @@ void login_adm()
 
 tela_inicial_adm:
     printf("\t--------------------------------------------------------------\n");
-    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
-    printf("\t\t\t\t\  TELA DE LOGIN\n");
+    printf("\t\t\t\t\   SISTEMA DE ROTAS\n");
+    printf("\t\t\t\t\PAINEL DO ADMINISTRADOR \n");
     printf("\t---------------------------------------------------------------\n\n");
     printf("\n\t\t\t1- REALIZAR CADASTRO DE USUARIOS\n");
     printf("\n\t\t\t2- REALIZAR CADASTRO DE ADMINISTRADORES\n");
@@ -469,6 +473,13 @@ tela_inicial_adm:
 void menu_login_inicial()
 {
     int op_login;
+    FILE *P;
+    P=fopen("login_usuario.txt", "r");
+    P=fopen("login_admin.txt", "r");
+    fread(&usuario, sizeof(usuario), 1, P);
+    fread(&cadastro_user, sizeof(cadastro_user), 1, P);
+    fread(&admin, sizeof(admin), 1, P);
+    fread(&cad_admin, sizeof(cad_admin), 1, P);
 
 menu_de_login:
     printf("\t--------------------------------------------------------------\n");
@@ -496,6 +507,7 @@ menu_de_login:
         system("cls");
         goto menu_de_login;
     }
+    fclose(P);
 }
 
 
@@ -626,6 +638,7 @@ void cabecalho(void)
     printf("\t\t\tCRIACAO DA ROTA:\n");
     printf("\t\t\t 1 - ADICIONAR GRAFO\n"
            "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
+           "\t\t\t 3 - VOLTAR MENU\n"
            "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
     printf("\t\t\tOPCAO :");
     scanf("%i", &opcao);
@@ -639,9 +652,15 @@ void cabecalho(void)
         procurar();
         break;
 
+    case 3:
+        system("cls");
+        login_adm();
+        break;
+
+
     default:
         system("cls");
-        printf("\t\t\tVALOR INVALIDO DIGITE 1 OU 2\n");
+        printf("\t\t\tVALOR INVALIDO!!! DIGITE 1, 2 ou 3\n");
         printf("\t\t\tPARA SAIR DIGITE CRTL + C\n");
         getch();
         system("cls");
