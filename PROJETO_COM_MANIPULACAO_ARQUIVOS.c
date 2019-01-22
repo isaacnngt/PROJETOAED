@@ -189,15 +189,16 @@ admin_existente:
 }
 void listar_usuarios()
 {
-    int i,j, n=1, r;
-    int ordem;
-    ordem=0;
     FILE *P;
     P=fopen("login_usuario.txt", "r");
     fread(&usuario, sizeof(usuario), 1, P);
 
+    int i,j, n=1, r;
+    int ordem;
+    ordem=0;
+
     printf("\t\t\tLISTA DOS USUARIOS CADASTRADOS NO SISTEMA\n\n");
-    for(i=0; i<10; i++)
+    for(i=0; i<1000; i++)
     {
         if(usuario[i].status==1)
         {
@@ -205,21 +206,24 @@ void listar_usuarios()
             ordem++;
         }
     }
-    printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU");
+    printf("\n\t\t\t\t");
     system("pause");
     system("cls");
     getch();
+    fclose(P);
     login_adm();
 }
 
 void listar_administrador()
 {
-    int i,j, n=1, r;
-    int ordem;
-    ordem=0;
+
     FILE *P;
     P=fopen("login_admin.txt", "r");
     fread(&admin, sizeof(admin), 1, P);
+
+    int i,j, n=1, r;
+    int ordem;
+    ordem=0;
 
     printf("\t\t\tLISTA DOS ADMINISTRADORES CADASTRADOS NO SISTEMA\n\n");
     for(i=0; i<10; i++)
@@ -230,9 +234,11 @@ void listar_administrador()
             ordem++;
         }
     }
-    printf("\n\t\t\tPRESSIONE QUALQUER TECLA PARA VOLTAR AO MENU");
-    getch();
+    printf("\n\t\t\t\t");
+    system("pause");
     system("cls");
+    getch();
+    fclose(P);
     login_adm();
 }
 
