@@ -200,16 +200,18 @@ void listar_usuarios()
     int ordem;
     ordem=0;
 
+    printf("\t\t***********************************************************\n");
     printf("\t\t\tLISTA DOS USUARIOS CADASTRADOS NO SISTEMA\n\n");
+    printf("\t\t***********************************************************\n");
     for(i=0; i<1000; i++)
     {
         if(usuario[i].status==1)
         {
-            printf("\t\t\tUsuario: %s Senha: %s \n",  cadastro_user[ordem].user, usuario[ordem].pass );
+            printf("\t\t\tUsuario: %s \tSenha: %s \n",  cadastro_user[ordem].user, usuario[ordem].pass );
             ordem++;
         }
     }
-    printf("\n\t\t\t\t");
+    printf("\n\t\t\t");
     system("pause");
     system("cls");
     getch();
@@ -229,16 +231,19 @@ void listar_administrador()
     int ordem;
     ordem=0;
 
+    printf("\t\t***********************************************************\n");
     printf("\t\t\tLISTA DOS ADMINISTRADORES CADASTRADOS NO SISTEMA\n\n");
+    printf("\t\t***********************************************************\n");
+
     for(i=0; i<10; i++)
     {
         if(admin[i].status==1)
         {
-            printf("\t\t\tAdministrador: %s Senha: %s \n", cad_admin[ordem].user ,admin[ordem].pass );
+            printf("\t\t\tAdministrador: %s \tSenha: %s \n", cad_admin[ordem].user ,admin[ordem].pass );
             ordem++;
         }
     }
-    printf("\n\t\t\t\t");
+    printf("\n\t\t\t");
     system("pause");
     system("cls");
     getch();
