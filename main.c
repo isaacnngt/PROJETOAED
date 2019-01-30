@@ -479,13 +479,13 @@ void procurar(void)
 int main(int argc, char **argv)
 {
     //Setando o local para aceitar acentos
-    //setlocale(LC_ALL,"Portuguese");
-    //int i, j;
+    setlocale(LC_ALL,"Portuguese");
+    int i, j;
     //char opcao[3], l[50];
     int opcao;
 
-    frescura();
-    menu_login_inicial();
+    //frescura();
+    //menu_login_inicial();
     cabecalho();
 
 
