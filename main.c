@@ -1,20 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <time.h>
-#include <windows.h>
 #define FLSH gets(l)
 #define conta_adm "admin"
 #define senha_adm "admin"
-#include <locale.h>
 #include "menus.h"
 
 void login_adm();
 void menu_login_inicial();
 void login_usuario();
 int validar_login_usuario();
-
-
 
 /*-----------------------------------------------------------------------
               PARTE DE LOGIN (ADMINISTRADOR E USUARIO)
@@ -189,7 +181,7 @@ void login_usuario()
 tela_inicial_user:
     //printf("\n\t\t\t9- VOLTAR TELA DE LOGIN");
     system("cls");
-    cabecalho_usuario();
+    cabecalho();
     /*printf("\n\t\t\tCTRL + C PARA Fechar\n\t");
     scanf("%d",&op_user);
 
@@ -480,12 +472,12 @@ int main(int argc, char **argv)
 {
     //Setando o local para aceitar acentos
     setlocale(LC_ALL,"Portuguese");
+    //Variaveis
     int i, j;
-    //char opcao[3], l[50];
     int opcao;
 
-    //frescura();
-    //menu_login_inicial();
+    frescura();
+    menu_login_inicial();
     cabecalho();
 
 

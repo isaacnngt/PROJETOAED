@@ -1,12 +1,12 @@
 # depslib dependency file v1.0
-1548813414 source:c:\users\home\documents\github\projetoaed\main.c
+1548815752 source:c:\users\home\documents\github\projetoaed\main.c
+	"menus.h"
+
+1548815972 c:\users\home\documents\github\projetoaed\menus.h
 	<stdio.h>
 	<stdlib.h>
 	<math.h>
 	<time.h>
 	<windows.h>
 	<locale.h>
-	"menus.h"
-
-1548813202 c:\users\home\documents\github\projetoaed\menus.h
 

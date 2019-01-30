@@ -1,9 +1,11 @@
 #ifndef MENUS_H_INCLUDED
 #define MENUS_H_INCLUDED
-
-
-
-#endif // MENUS_H_INCLUDED
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+#include <windows.h>
+#include <locale.h>
 /*-----------------------------------------------------------------------
               #1 TELA INCIAL - CARREGAMENTO DO SISTEMA
 ------------------------------------------------------------------------*/
@@ -101,10 +103,10 @@ tela_inicial_adm:
     printf("\t\t\t\t\SISTEMA DE ROTAS\n");
     printf("\t\t\t\t\  TELA DE LOGIN\n");
     printf("\t---------------------------------------------------------------\n\n");
-    printf("\n\t\t\t1- REALIZAR CADASTRO DE USUARIOS\n");
-    printf("\n\t\t\t2- REALIZAR CADASTRO DE ADMINISTRADORES\n");
-    printf("\n\t\t\t3- VOLTAR TELA DE LOGIN\n");
-    printf("\n\t\t\t4- MENU GRAFOS\n");
+    printf("\n\t\t\t1. REALIZAR CADASTRO DE USUARIOS\n");
+    printf("\n\t\t\t2. REALIZAR CADASTRO DE ADMINISTRADORES\n");
+    printf("\n\t\t\t3. VOLTAR TELA DE LOGIN\n");
+    printf("\n\t\t\t4. MENU GRAFOS\n");
     printf("\n\t\t\tCTRL + C PARA FECHAR\n");
     printf("\t\t\tOPCAO:\t");
     scanf("%d", &op_adm);
@@ -172,69 +174,48 @@ tela_inicial_adm:
 --------------------------------------------------------------------------------------------*/
 void cabecalho(void)
 {
-    int opcao;
-    printf("\t--------------------------------------------------------------\n");
-    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
-    printf("\t---------------------------------------------------------------\n\n");
-    printf("\t\t\tCRIACAO DA ROTA:\n");
-    printf("\t\t\t 1 - ADICIONAR GRAFO\n"
-           "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
-           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
-    printf("\t\t\tOPCAO :");
-    scanf("%i", &opcao);
-    switch (opcao)
+
+    //Variável para o Menu
+    int opcao_principal = 0;
+
+    //While para voltar sempre para o Menu
+    while(opcao_principal==0)
     {
-    case 1:
-        add();
-        break;
+        int opcao_menu;
+        //Menu Principal
 
-    case 2:
-        procurar();
-        break;
+        printf("\t--------------------------------------------------------------\n");
+        printf("\t\t\t\t\ SISTEMA DE ROTAS\n");
+        printf("\t\t\t\-------  MENU ROTAS  -------\n");
+        printf("\t---------------------------------------------------------------\n\n");
+        printf("\t\t\t CRIACAO DA ROTA:\n");
+        printf("\t\t\t 1. ADICIONAR GRAFO\n"
+               "\t\t\t 2. PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
+               "\t\t\t 3. VOLTAR MENU DE LOGIN\n"
+               "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
+        printf("\t\t\tDigite o nº da opção desejada: ");
+        scanf(" %d", &opcao_menu);
 
-    default:
-        system("cls");
-        printf("\t\t\tVALOR INVALIDO DIGITE 1 OU 2\n");
-        printf("\t\t\tPARA SAIR DIGITE CRTL + C\n");
-        getch();
-        system("cls");
-        printf("\n");
-        cabecalho();
+
+        switch(opcao_menu)
+        {
+
+        case 1:
+            add();
+            break;
+        case 2:
+            procurar();
+            break;
+        case 3:
+            system("cls");
+            menu_login_inicial();
+            break;
+        default:
+            system("cls");
+            printf("Opção INVALIDA\n");
+            break;
+        }
     }
 }
-void cabecalho_usuario(void)
-{
-    int opcao;
-tela_inicial_usu:
-    printf("\t--------------------------------------------------------------\n");
-    printf("\t\t\t\t\SISTEMA DE ROTAS\n");
-    printf("\t---------------------------------------------------------------\n\n");
-    printf("\t\t\tCRIACAO DA ROTA:\n");
-    printf("\t\t\t 1 - CRIAR NOVO GRAFO GRAFO\n"
-           "\t\t\t 2 - PROCURAR OS MENORES CAMINHOS NO GRAFO\n"
-           "\t\t\t 3 - VOLTAR MENU DE LOGIN\n"
-           "\t\t\t CTRL+C PARA SAIR DO PROGRAMA\n\n");
-    printf("\t\t\tOPCAO :");
-    scanf("%i", &opcao);
-    if (opcao == 1)
-    {
-        add();
-    }
-    else if (opcao == 2)
-    {
-        procurar();
-    }
-    else if (opcao == 3)
-    {
-        system("cls");
-        menu_login_inicial();
-    }
-    else
-    {
 
-        system("cls");
-        printf("\n\tATENCAO! >> OPCAO INVALIDA DIGITE 1, 2, 3 OU CTRL + C PARA FECHAR O PROGRAMA\n\n");
-        goto tela_inicial_usu;
-    }
-
-}
+#endif // MENUS_H_INCLUDED
