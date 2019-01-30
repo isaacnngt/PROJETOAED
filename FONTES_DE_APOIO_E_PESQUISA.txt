@@ -1,0 +1,13 @@
+/*****************************************************************
+        IMPLANTAÇÃO DO ALGORITMO DE MENOR CAMINHO EX 1
+*****************************************************************/
+
+http://www.lcad.icmc.usp.br/~nonato/ED/Dijkstra/node84_1.html
+
+https://www.youtube.com/watch?v=5y8dch2uHR4
+
+https://pastebin.com/sywwvPmj
+
+https://www.vivaolinux.com.br/script/Algoritmo-de-Dijkstra
+
+https://www.ime.usp.br/~glauber/pessoal/freeware/dijkstra.c
