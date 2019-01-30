@@ -2,7 +2,56 @@
 #include <stdlib.h>
 #include <math.h>
 #include <locale.h>
+#include <time.h>
+#include <windows.h>
 #define MAXVERTICES 50
+
+void frescura()
+{
+
+    printf("\t\t\t                / _____ \                  \n");
+    printf("\t\t\t          _____/ /     \ \_____            \n");
+    printf("\t\t\t         / _____/ WAYZE \_____ \           \n");
+    printf("\t\t\t   _____/ /     \       /     \ \_____     \n");
+    printf("\t\t\t  / _____/  221  \_____/  412  \_____ \    \n");
+    printf("\t\t\t / /     \       /     \       /     \ \   \n");
+    printf("\t\t\t/ /  131  \_____/  322  \_____/  513  \ \  \n");
+    printf("\t\t\t\ \       /     \       /     \       / /  \n");
+    printf("\t\t\t \ \_____/  232  \_____/  423  \_____/ /   \n");
+    printf("\t\t\t / /     \       /     \       /     \ \   \n");
+    printf("\t\t\t/ /  142  \_____/ WAYZE \_____/  524  \ \  \n");
+    printf("\t\t\t\ \       /     \       /     \       / /  \n");
+    printf("\t\t\t \ \_____/  243  \_____/  434  \_____/ /   \n");
+    printf("\t\t\t / /     \       /     \       /     \ \   \n");
+    printf("\t\t\t/ /  153  \_____/  344  \_____/  535  \ \  \n");
+    printf("\t\t\t\ \       /     \       /     \       / /  \n");
+    printf("\t\t\t \ \_____/  254  \_____/  445  \_____/ /   \n");
+    printf("\t\t\t  \_____ \       /     \       / _____/    \n");
+    printf("\t\t\t        \ \_____/  355  \_____/ /          \n");
+    printf("\t\t\t         \_____ \       / _____/           \n");
+    printf("\t\t\t               \ \_____/ /                 \n");
+
+    printf("\n\n\n\t\t\t..::: WAYZE SISTEMA DE ROTAS  :::.. ");
+
+
+    printf ("\n\n\t\t\t\tCARREGANDO O SISTEMA: \n\n");
+
+    for (int w = 0; w <= 25; w++)
+    {
+        printf (" %d%%\r", w*4);
+        fflush (stdout);
+        for (int k = 0; k < w ; k++)
+        {
+            if (!k) // Da espaco na barra pra nao enconstar na borda da tela
+                printf ("\t\t\t     ");
+
+            printf ("%c", 219);
+            Sleep(3);
+        }
+    }
+    printf ("\n\nInicializando sistema...");
+    system("cls");
+}
 
 void dijkstra(int vertices,int origem,int destino,int *custos)
 {
@@ -12,19 +61,19 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
             fread(&origem, sizeof(origem), 1, P);
             fread(&destino, sizeof(destino), 1, P);
             fread(&custos, sizeof(custos), 1, P);*/
-    int i,v,                  /* vari·veis auxiliares */
+    int i,v,                  /* vari√°veis auxiliares */
         ant[MAXVERTICES],     /* vetor dos antecessores */
-        z[MAXVERTICES];       /* vÈrtices para os quais se conhece o caminho mÌnimo */
-    double min,               /* vari·vel auxiliar */
+        z[MAXVERTICES];       /* v√©rtices para os quais se conhece o caminho m√≠nimo */
+    double min,               /* vari√°vel auxiliar */
            dist[MAXVERTICES]; /* vetor com os custos dos caminhos */
 
-    /* OBS: O usu·rio enxerga os vÈrtices como rotulados de 1 a "vÈrtices",
-     mas o programa armazena as informaÁıes usando os elementos 0 dos
-     dos vetores. Dessa formar È preciso subtrair 1 de "origem" e "destino"
-     ao mape·-los nos vetores. */
+    /* OBS: O usu√°rio enxerga os v√©rtices como rotulados de 1 a "v√©rtices",
+     mas o programa armazena as informa√ß√µes usando os elementos 0 dos
+     dos vetores. Dessa formar √© preciso subtrair 1 de "origem" e "destino"
+     ao mape√°-los nos vetores. */
 
     /************************************************************************************
-                                   InicializaÁ„o
+                                   Inicializa√ß√£o
     ************************************************************************************/
 
     for (i=0; i<vertices; i++)
@@ -45,14 +94,14 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
     dist[origem-1]=0;
 
     /*************************************************************************************
-                                  LaÁo principal
+                                  La√ßo principal
     *************************************************************************************/
 
     do
     {
 
         /*******************************************************
-              Encontrando o vÈrtice que deve entrar em z
+              Encontrando o v√©rtice que deve entrar em z
         *******************************************************/
 
         min=HUGE_VAL;
@@ -65,7 +114,7 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
                 }
 
         /*******************************************************
-            Calculando as dist‚ncias dos novos vizinhos de z
+            Calculando as dist√¢ncias dos novos vizinhos de z
         *******************************************************/
 
         if (min!=HUGE_VAL && v!=destino-1)
@@ -89,11 +138,11 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
     **********************************************************/
 
     if (min==HUGE_VAL)
-        printf("\nNo grafo dado n„o existe caminho entre os vÈrtices %d e %d !!\n",origem,destino);
+        printf("\nNo grafo dado n√£o existe caminho entre os v√©rtices %d e %d !!\n",origem,destino);
     else
     {
         system("cls");
-        printf("\nO caminho de menor custo entre os vÈrtices %d e %d  È: \n",
+        printf("\nO caminho de menor custo entre os v√©rtices %d e %d  √©: \n",
                origem,destino);//Exibe o custo de forma decrescente
         i=destino;
         printf("%d",i); //exbibe o vertice de origem do grafo
@@ -103,7 +152,7 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
             printf("->%d",i+1); //Exibe o vertice de destino do grafo
             i=ant[i];
         }
-        printf("\nO custo deste caminho È: %d\n",(int) dist[destino-1]);
+        printf("\nO custo deste caminho √©: %d\n",(int) dist[destino-1]);
         printf("Pressione qualquer tecla para continuar");
         getch();
         system("cls");
@@ -111,50 +160,59 @@ void dijkstra(int vertices,int origem,int destino,int *custos)
     }
 //    fclose(P);
 
-} /* dijsktra */
+} /* fim dijsktra */
 
+/************************************************************************************************************
+                                              M√âTODO PRINCIPAL
+************************************************************************************************************/
 
 main(int argc, char **argv)
 {
     setlocale(LC_ALL,"Portuguese");
+    frescura();
 
-    char opcao,lixo[50];   /* vari·veis auxiliares */
-    int i,custo,           /* vari·veis auxiliares */
-        vertices=0,        /* n˙mero de vÈrtices do grafo */
-        origem,            /* vÈrtice origem */
-        destino,           /* vÈrtice destino */
-        *custos=NULL;      /* matriz de incidÍncia */
+    char lixo[50];   /* vari√°veis auxiliares */
+    int i,custo,           /* vari√°veis auxiliares */
+        vertices=0,        /* n√∫mero de v√©rtices do grafo */
+        origem,            /* v√©rtice origem */
+        destino,           /* v√©rtice destino */
+        *custos=NULL,      /* matriz de incid√™ncia */
+        opcao,
+        remover;
 
     do
     {
+        system("cls");//LIMPAR A TELA CASO N√ÉO SEJA DIGITADO UM VALOR ADEQUADO DENTRO DO MENU PRINCIPAL
         /************************************************************************************
                                           Menu principal
         ************************************************************************************/
         printf("*******************************************************\n");
-        printf("                Menu de opÁıes \n");
+        printf("                Menu de op√ß√µes \n");
         printf("*******************************************************\n");
-        printf("Escolha sua opÁ„o:\n");
+        printf("Escolha sua op√ß√£o:\n");
         printf("     1. Digitar um grafo\n");
-        printf("     2. Resolver uma inst‚ncia\n");
-        printf("     3. Sair do programa\n\n");
-        printf("OpÁ„o: ");
-        gets(&opcao);
+        printf("     2. Resolver uma inst√¢ncia\n");
+        printf("     3. Remover v√©rtice\n");
+        printf("     4. Alterar grafo\n");
+        printf("     CTRL + C para sair do programa\n\n");
+        printf("Op√ß√£o: ");
+        scanf("%d",&opcao);
         /*****************************************************************
                               Digitar novo grafo
         *****************************************************************/
-        if (opcao==49)
+        if (opcao == 1)
         {
 
             do
             {
-                printf("\nN˙mero de vÈrtices (entre 2 e %d): ",MAXVERTICES);
+                printf("\nN√∫mero de v√©rtices (entre 2 e %d): ",MAXVERTICES);
                 scanf("%d",&vertices);
             }
-            while (vertices<2 || vertices>MAXVERTICES);  //Se mantÈm no laÁo atÈ que seja digitado um valor v·lido entre 2 e 100
+            while (vertices<2 || vertices>MAXVERTICES);  //Se mant√©m no la√ßo at√© que seja digitado um valor v√°lido entre 2 e 100
 
             if (!custos)
                 free(custos);
-            custos=(int *) malloc(sizeof(int)*vertices*vertices); //Alocando memÛria
+            custos=(int *) malloc(sizeof(int)*vertices*vertices); //Alocando mem√≥ria
             for (i=0; i<=vertices*vertices; i++)
                 custos[i]=-1;
             system("cls");
@@ -162,10 +220,8 @@ main(int argc, char **argv)
             printf("           Preenchendo os dados das arestas\n");
             printf("*******************************************************\n");
             printf(" \n");
-
             do
             {
-
                 do
                 {
                     printf("\n");
@@ -173,7 +229,7 @@ main(int argc, char **argv)
                     scanf("%d",&origem);
 
                 }
-                while (origem<0 || origem>vertices);  //ValidaÁ„o para trazer um valor de aresta v·lido
+                while (origem<0 || origem>vertices);  //Valida√ß√£o para trazer um valor de aresta v√°lido
 
                 if (origem)
                 {
@@ -182,61 +238,137 @@ main(int argc, char **argv)
                     {
                         printf("Destino da aresta (entre 1 e %d, menos %d): ",vertices,origem);
                         scanf("%d",&destino);
-
                     }
-                    while (destino<1 || destino>vertices || destino==origem);  //validaÁ„o para trazer um destino v·lido para aresta
+                    while (destino<1 || destino>vertices || destino==origem);  //valida√ß√£o para trazer um destino v√°lido para aresta
 
                     do
                     {
-                        printf("Peso da aresta do vÈrtice %d para o vÈrtice %d (ATEN«√O -> USAR VALORES POSITIVOS): ",origem,destino);
+                        printf("Peso da aresta do v√©rtice %d para o v√©rtice %d (ATEN√á√ÉO -> USAR VALORES POSITIVOS): ",origem,destino);
                         scanf("%d",&custo);
-
                     }
                     while (custo<0);
-
                     custos[(origem-1)*vertices+destino-1]=custo; //Armazena os dados de custo do grafo
-                    fwrite(&custos, sizeof(custos), 1, P);
-
-
                 }
-
             }
             while (origem);
-            gets(lixo); //N„o tirar
+            gets(lixo); //N√£o tirar
             system("cls");
         }
 
         /**************************************************
-               Achar caminho mÌnimo entre 2 vÈrtices
+               Achar caminho m√≠nimo entre 2 v√©rtices
         **************************************************/
 
-        if (opcao==50 && vertices>0)
+        /*NESTE if √â PREENCHIDO OS DADOS DAS ARESTAS E POSTERIORMENTE E CHAMADO
+        O PROCEDIMENTO "dijkstra()" NA QUAL IR√Å MOSTRAR O MENOR CAMINHO*/
+
+        if (opcao == 2 && vertices>0)
         {
-
-            printf("\nDigite os vÈrtices origem e destino do caminho\n");
+            printf("\nDigite os v√©rtices origem e destino do caminho\n");
             do
             {
-                printf("VÈrtice origem (entre 1 e %d): ",vertices);
+                printf("V√©rtice origem (entre 1 e %d): ",vertices);
                 scanf("%d",&origem);
-
             }
-            while (origem<1 || origem>vertices);  //ValidaÁ„o para entrar com valor v·lido de vertice
+            while (origem<1 || origem>vertices);  //Valida√ß√£o para entrar com valor v√°lido de vertice
 
             do
             {
-                printf("VÈrtice destino (entre 1 e %d, menos %d): ",vertices,origem);
+                printf("V√©rtice destino (entre 1 e %d, menos %d): ",vertices,origem);
                 scanf("%d",&destino);
             }
-            while (destino<1 || destino>vertices || destino==origem);   //ValidaÁ„o para entrar com valor v·lido de vertice
+            while (destino<1 || destino>vertices || destino==origem);   //Valida√ß√£o para entrar com valor v√°lido de vertice
 
             dijkstra(vertices,origem,destino,custos);
 
-            gets(lixo);//N„o tirar
+            gets(lixo);//N√£o tirar
         }
 
+        /**************************************************
+                   Removendo v√©rtices do grafo
+        **************************************************/
 
+         if (opcao == 3 && vertices>0)
+         {
+           system("cls");
+           printf("Qual v√©rtice deseja remover?\n");
+           printf("Op√ß√£o:");
+           scanf("%i",&remover);
+           system("cls");
+           printf("Remo√ß√£o do v√©rtice %i \n", remover);
+            do
+            {
+                printf("V√©rtice origem (entre 1 e %d): ",vertices);
+                scanf("%d",&origem);
+            }
+            while (origem<1 || origem>vertices);  //Valida√ß√£o para entrar com valor v√°lido de vertice
+
+            do
+            {
+                printf("V√©rtice destino (entre 1 e %d, menos %d): ",vertices,origem);
+                scanf("%d",&destino);
+            }
+            while (destino<1 || destino>vertices || destino==origem);   //Valida√ß√£o para entrar com valor v√°lido de vertice
+         }
+
+
+        /**************************************************
+                   Alterando dados do gafo
+        **************************************************/
+
+          if (opcao == 4)
+        {
+
+            do
+            {
+                printf("\nN√∫mero de v√©rtices (entre 2 e %d): ",MAXVERTICES);
+                scanf("%d",&vertices);
+            }
+            while (vertices<2 || vertices>MAXVERTICES);  //Se mant√©m no la√ßo at√© que seja digitado um valor v√°lido entre 2 e 100
+
+            if (!custos)
+                free(custos);
+            custos=(int *) malloc(sizeof(int)*vertices*vertices); //Alocando mem√≥ria
+            for (i=0; i<=vertices*vertices; i++)
+                custos[i]=-1;
+            system("cls");
+            printf(" \n");
+            do
+            {
+                do
+                {
+                    printf("\n");
+                    printf("Origem da aresta (entre 1 e %d ou 0 para sair): ",vertices);
+                    scanf("%d",&origem);
+
+                }
+                while (origem<0 || origem>vertices);  //Valida√ß√£o para trazer um valor de aresta v√°lido
+
+                if (origem)
+                {
+
+                    do
+                    {
+                        printf("Destino da aresta (entre 1 e %d, menos %d): ",vertices,origem);
+                        scanf("%d",&destino);
+                    }
+                    while (destino<1 || destino>vertices || destino==origem);  //valida√ß√£o para trazer um destino v√°lido para aresta
+
+                    do
+                    {
+                        printf("Peso da aresta do v√©rtice %d para o v√©rtice %d (ATEN√á√ÉO -> USAR VALORES POSITIVOS): ",origem,destino);
+                        scanf("%d",&custo);
+                    }
+                    while (custo<0);
+                    custos[(origem-1)*vertices+destino-1]=custo; /*Passa novamente para o ponteiro de incidencia
+                    os dados a sereme armazenados no grafo*/
+                }
+            }
+            while (origem);
+            gets(lixo); //N√£o tirar
+            system("cls");
+        }
     }
-    while (opcao!=51);
+    while (opcao > 4 );
 
 }
-
