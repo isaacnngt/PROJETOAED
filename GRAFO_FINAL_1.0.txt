@@ -1,0 +1,242 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <locale.h>
+#define MAXVERTICES 50
+
+void dijkstra(int vertices,int origem,int destino,int *custos)
+{
+    /*FILE *P;
+            P=fopen("login_admin.txt", "r");
+            fread(&vertices, sizeof(vertices), 1, P);
+            fread(&origem, sizeof(origem), 1, P);
+            fread(&destino, sizeof(destino), 1, P);
+            fread(&custos, sizeof(custos), 1, P);*/
+    int i,v,                  /* variáveis auxiliares */
+        ant[MAXVERTICES],     /* vetor dos antecessores */
+        z[MAXVERTICES];       /* vértices para os quais se conhece o caminho mínimo */
+    double min,               /* variável auxiliar */
+           dist[MAXVERTICES]; /* vetor com os custos dos caminhos */
+
+    /* OBS: O usuário enxerga os vértices como rotulados de 1 a "vértices",
+     mas o programa armazena as informações usando os elementos 0 dos
+     dos vetores. Dessa formar é preciso subtrair 1 de "origem" e "destino"
+     ao mapeá-los nos vetores. */
+
+    /************************************************************************************
+                                   Inicialização
+    ************************************************************************************/
+
+    for (i=0; i<vertices; i++)
+    {
+        if (custos[(origem-1)*vertices+i]!=-1)
+        {
+            ant[i]=origem-1;
+            dist[i]=custos[(origem-1)*vertices+i];
+        }
+        else
+        {
+            ant[i]=-1;
+            dist[i]=HUGE_VAL;
+        }
+        z[i]=0;
+    }
+    z[origem-1]=1;
+    dist[origem-1]=0;
+
+    /*************************************************************************************
+                                  Laço principal
+    *************************************************************************************/
+
+    do
+    {
+
+        /*******************************************************
+              Encontrando o vértice que deve entrar em z
+        *******************************************************/
+
+        min=HUGE_VAL;
+        for (i=0; i<vertices; i++)
+            if (!z[i])
+                if (dist[i]>=0 && dist[i]<min)
+                {
+                    min=dist[i];
+                    v=i;
+                }
+
+        /*******************************************************
+            Calculando as distâncias dos novos vizinhos de z
+        *******************************************************/
+
+        if (min!=HUGE_VAL && v!=destino-1)
+        {
+            z[v]=1;
+            for (i=0; i<vertices; i++)
+                if (!z[i])
+                {
+                    if (custos[v*vertices+i]!=-1 && dist[v]+custos[v*vertices+i]<dist[i])
+                    {
+                        dist[i]=dist[v]+custos[v*vertices+i];
+                        ant[i]=v;
+                    }
+                }
+        }
+    }
+    while (v!=destino-1 && min!=HUGE_VAL);
+
+    /*********************************************************
+                    Imprimindo o resultado
+    **********************************************************/
+
+    if (min==HUGE_VAL)
+        printf("\nNo grafo dado não existe caminho entre os vértices %d e %d !!\n",origem,destino);
+    else
+    {
+        system("cls");
+        printf("\nO caminho de menor custo entre os vértices %d e %d  é: \n",
+               origem,destino);//Exibe o custo de forma decrescente
+        i=destino;
+        printf("%d",i); //exbibe o vertice de origem do grafo
+        i=ant[i-1];
+        while (i!=-1)
+        {
+            printf("->%d",i+1); //Exibe o vertice de destino do grafo
+            i=ant[i];
+        }
+        printf("\nO custo deste caminho é: %d\n",(int) dist[destino-1]);
+        printf("Pressione qualquer tecla para continuar");
+        getch();
+        system("cls");
+
+    }
+//    fclose(P);
+
+} /* dijsktra */
+
+
+main(int argc, char **argv)
+{
+    setlocale(LC_ALL,"Portuguese");
+
+    char opcao,lixo[50];   /* variáveis auxiliares */
+    int i,custo,           /* variáveis auxiliares */
+        vertices=0,        /* número de vértices do grafo */
+        origem,            /* vértice origem */
+        destino,           /* vértice destino */
+        *custos=NULL;      /* matriz de incidência */
+
+    do
+    {
+        /************************************************************************************
+                                          Menu principal
+        ************************************************************************************/
+        printf("*******************************************************\n");
+        printf("                Menu de opções \n");
+        printf("*******************************************************\n");
+        printf("Escolha sua opção:\n");
+        printf("     1. Digitar um grafo\n");
+        printf("     2. Resolver uma instância\n");
+        printf("     3. Sair do programa\n\n");
+        printf("Opção: ");
+        gets(&opcao);
+        /*****************************************************************
+                              Digitar novo grafo
+        *****************************************************************/
+        if (opcao==49)
+        {
+
+            do
+            {
+                printf("\nNúmero de vértices (entre 2 e %d): ",MAXVERTICES);
+                scanf("%d",&vertices);
+            }
+            while (vertices<2 || vertices>MAXVERTICES);  //Se mantém no laço até que seja digitado um valor válido entre 2 e 100
+
+            if (!custos)
+                free(custos);
+            custos=(int *) malloc(sizeof(int)*vertices*vertices); //Alocando memória
+            for (i=0; i<=vertices*vertices; i++)
+                custos[i]=-1;
+            system("cls");
+            printf("*******************************************************\n");
+            printf("           Preenchendo os dados das arestas\n");
+            printf("*******************************************************\n");
+            printf(" \n");
+
+            do
+            {
+
+                do
+                {
+                    printf("\n");
+                    printf("Origem da aresta (entre 1 e %d ou 0 para sair): ",vertices);
+                    scanf("%d",&origem);
+
+                }
+                while (origem<0 || origem>vertices);  //Validação para trazer um valor de aresta válido
+
+                if (origem)
+                {
+
+                    do
+                    {
+                        printf("Destino da aresta (entre 1 e %d, menos %d): ",vertices,origem);
+                        scanf("%d",&destino);
+
+                    }
+                    while (destino<1 || destino>vertices || destino==origem);  //validação para trazer um destino válido para aresta
+
+                    do
+                    {
+                        printf("Peso da aresta do vértice %d para o vértice %d (ATENÇÃO -> USAR VALORES POSITIVOS): ",origem,destino);
+                        scanf("%d",&custo);
+
+                    }
+                    while (custo<0);
+
+                    custos[(origem-1)*vertices+destino-1]=custo; //Armazena os dados de custo do grafo
+                    fwrite(&custos, sizeof(custos), 1, P);
+
+
+                }
+
+            }
+            while (origem);
+            gets(lixo); //Não tirar
+            system("cls");
+        }
+
+        /**************************************************
+               Achar caminho mínimo entre 2 vértices
+        **************************************************/
+
+        if (opcao==50 && vertices>0)
+        {
+
+            printf("\nDigite os vértices origem e destino do caminho\n");
+            do
+            {
+                printf("Vértice origem (entre 1 e %d): ",vertices);
+                scanf("%d",&origem);
+
+            }
+            while (origem<1 || origem>vertices);  //Validação para entrar com valor válido de vertice
+
+            do
+            {
+                printf("Vértice destino (entre 1 e %d, menos %d): ",vertices,origem);
+                scanf("%d",&destino);
+            }
+            while (destino<1 || destino>vertices || destino==origem);   //Validação para entrar com valor válido de vertice
+
+            dijkstra(vertices,origem,destino,custos);
+
+            gets(lixo);//Não tirar
+        }
+
+
+    }
+    while (opcao!=51);
+
+}
+
